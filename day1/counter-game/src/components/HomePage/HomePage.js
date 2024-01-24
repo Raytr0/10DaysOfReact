@@ -5,6 +5,10 @@ function HomePage() {
   const [count, setCount] = useState(0);
   const [timer, setTimer] = useState(0);
   const [hidden, setHidden] = useState(false);
+  const [functionbtn, sethidfunction] = useState(true);
+  const [time, getTime] = useState(0);
+
+
 
 
   useEffect(() => {
@@ -18,23 +22,68 @@ function HomePage() {
       clearInterval(interval);
     };
   }, [timer]);
+  const cps = Math.round(count/time);
 
   return (
     <div className="home-container">
       <div className="home-timer">timer:{timer}</div>
       <div className="home-count">{count}</div>
+      <div className="home-cps">CPS: {cps}</div>
       {(!hidden || timer === 0) &&
       <button
         className="home-btn-start btn"
         onClick={() => {
-          setTimer(3);
+          setTimer(1);
+          getTime(1);
           setCount(0);
           setHidden(true);
         }}
         disabled={timer !== 0}     
       >
-        start
+        1 sec
       </button>}
+      {(!hidden || timer === 0) &&
+      <button
+        className="home-btn-start btn"
+        onClick={() => {
+          setTimer(3);
+          getTime(3);
+          setCount(0);
+          setHidden(true);
+        }}
+        disabled={timer !== 0}     
+      >
+        3 sec
+      </button>}
+      {(!hidden || timer === 0) &&
+      <button
+        className="home-btn-start btn"
+        onClick={() => {
+          setTimer(5);
+          getTime(5);
+          setCount(0);
+          setHidden(true);
+        }}
+        disabled={timer !== 0}     
+      >
+        5 sec
+      </button>}
+      {(!hidden || timer === 0) &&
+      <button
+        className="home-btn-start btn"
+        onClick={() => {
+          setTimer(10);
+          getTime(10);
+          setCount(0);
+          setHidden(true);
+        }}
+        disabled={timer !== 0}     
+      >
+        10 sec
+      </button>}
+
+      {(!functionbtn || timer !== 0) &&
+
       <button
         className="home-btn-click btn"
         onClick={() => setCount(count + 1)}
@@ -42,6 +91,8 @@ function HomePage() {
       >
         click me
       </button>
+}
+      {(!functionbtn || timer !== 0) &&
       <button
         className="home-btn-reset btn"
         onClick={() => {
@@ -51,6 +102,7 @@ function HomePage() {
       >
         reset
       </button>
+}
     </div>
   );
 }
